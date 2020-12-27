@@ -1,15 +1,23 @@
 from PyQt5.QtWidgets import *
-from gui import welcome
+from view import welcome
+from model.Entry import Entry
+import datetime
 
 
-def main():
-
+# starts welcome view
+def run_gui():
     app = QApplication([])
     MainWindow = QMainWindow()
     ui = welcome.Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     app.exec_()
+
+
+# entry point of program
+def main():
+    run_gui()
+
 
 if __name__ == '__main__':
     main()
