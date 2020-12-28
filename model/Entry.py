@@ -2,15 +2,15 @@ import datetime
 
 
 class Entry:
-    def __init__(self, name, description, amount, weekly, yearly, date):
+    def __init__(self, name, description, amount, monthly, yearly, date):
         assert isinstance(name, str)
         self.name = name
         assert isinstance(description, str)
         self.description = description
         assert isinstance(amount, int)
         self.amount = amount
-        assert isinstance(weekly, bool)
-        self.weekly = weekly
+        assert isinstance(monthly, bool)
+        self.monthly = monthly
         assert isinstance(yearly, bool)
         self.yearly = yearly
         assert isinstance(date, datetime.date)
@@ -34,11 +34,11 @@ class Entry:
     def set_amount(self, amount):
         self.amount = amount
 
-    def get_weekly(self):
-        return self.weekly
+    def get_monthly(self):
+        return self.monthly
 
-    def set_weekly(self, weekly):
-        self.weekly = weekly
+    def set_monthly(self, monthly):
+        self.monthly = monthly
 
     def get_yearly(self):
         return self.yearly
