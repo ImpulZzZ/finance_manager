@@ -1,15 +1,16 @@
 from PyQt5.QtWidgets import *
-from view import welcome as welcome
-from view import entry as entry
+from view import welcome_gui as welcome_gui
+from view import entry_gui as entry_gui
+from view import main_gui as main_gui
 from model.Entry import Entry
 import datetime
 
 
 # shows details of an entry
-def show_entry(entry_object):
+def run_show_entry_gui(entry_object):
     app = QApplication([])
     main_window = QMainWindow()
-    ui = entry.Ui_MainWindow()
+    ui = entry_gui.Ui_MainWindow()
     ui.setupUi(main_window)
 
     # change title and fill in the labels in gui
@@ -31,11 +32,23 @@ def show_entry(entry_object):
     app.exec_()
 
 
-# starts welcome view
-def run_gui():
+# starts the main gui
+def run_main_gui(entries):
+
     app = QApplication([])
     main_window = QMainWindow()
-    ui = welcome.Ui_MainWindow()
+    ui = main_gui.Ui_MainWindow()
+    ui.setupUi(main_window)
+
+    main_window.show()
+    app.exec_()
+
+
+# starts welcome view
+def run_welcome_gui():
+    app = QApplication([])
+    main_window = QMainWindow()
+    ui = welcome_gui.Ui_MainWindow()
     ui.setupUi(main_window)
     main_window.show()
     app.exec_()
@@ -43,8 +56,14 @@ def run_gui():
 
 # entry point of program
 def main():
-    show_entry(Entry(name="Name", description="Entry for test purposes", amount=512, monthly=False, yearly=True,
-                     date=datetime.date(2021, 11, 27)))
+    # array of all entries
+    entries = []
+
+    # insert a test entry
+    entries.append(Entry(name="Name", description="Entry for test purposes", amount=512, monthly=False, yearly=True,
+                         date=datetime.date(2021, 11, 27)))
+
+    run_main_gui(entries)
 
 
 if __name__ == '__main__':
