@@ -34,7 +34,6 @@ def run_show_entry_gui(entry_object):
 
 # starts the main gui
 def run_main_gui(entries):
-
     app = QApplication([])
     main_window = QMainWindow()
     ui = main_gui.Ui_MainWindow()
@@ -61,7 +60,7 @@ def main():
 
     # insert a test entry
     entries.append(Entry(name="Name", description="Entry for test purposes", amount=512, monthly=False, yearly=True,
-                         date=datetime.date(2021, 11, 27)))
+                         date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
 
     run_main_gui(entries)
 

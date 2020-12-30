@@ -2,7 +2,7 @@ import datetime
 
 
 class Entry:
-    def __init__(self, name, description, amount, monthly, yearly, date):
+    def __init__(self, name, description, amount, monthly, yearly, date, last_date):
         assert isinstance(name, str)
         self.name = name
         assert isinstance(description, str)
@@ -15,6 +15,8 @@ class Entry:
         self.yearly = yearly
         assert isinstance(date, datetime.date)
         self.date = date
+        assert isinstance(last_date, datetime.date)
+        self.last_date = last_date
 
     def get_name(self):
         return self.name
@@ -51,3 +53,9 @@ class Entry:
 
     def set_date(self, date):
         self.date = date
+
+    def get_last_date(self):
+        return self.last_date
+
+    def set_last_date(self, last_date):
+        self.last_date = last_date
