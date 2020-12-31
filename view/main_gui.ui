@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>813</width>
-    <height>609</height>
+    <width>655</width>
+    <height>769</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,46 @@
    <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>20</y>
-      <width>411</width>
-      <height>371</height>
+      <x>20</x>
+      <y>30</y>
+      <width>581</width>
+      <height>651</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="new_element_button">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>690</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>New Element</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="delete_button">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>40</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>trash.jpg</normaloff>trash.jpg</iconset>
     </property>
    </widget>
   </widget>
@@ -30,7 +65,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>813</width>
+     <width>655</width>
      <height>22</height>
     </rect>
    </property>
