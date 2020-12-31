@@ -39,15 +39,36 @@ def run_main_gui(entries):
     ui = main_gui.Ui_MainWindow()
     ui.setupUi(main_window)
 
+    ui.tableWidget.setColumnCount(5)
+
     counter = 0
     for entry in entries:
-        ui.listWidget.addItem(QListWidgetItem())
 
-        # TODO make distances dynamically, so that amount is vertically symmetric
-        label = entry.name + "     " + str(entry.amount) + "€"
+        # change table size dynamically
+        ui.tableWidget.setRowCount(ui.tableWidget.rowCount() + 1)
 
-        ui.listWidget.item(counter).setText(label)
+        if entry.yearly:
+            rotation = "yearly"
+        if entry.monthly:
+            rotation = "monthly"
+        if not entry.monthly and not entry.yearly:
+            rotation = "once"
+
+        # make strings as QTableWidgetItems
+        entry_name = QTableWidgetItem(entry.name)
+        entry_amount = QTableWidgetItem(str(entry.amount))
+        entry_pay_rotation = QTableWidgetItem(rotation)
+        entry_pay_date = QTableWidgetItem(str(entry.date))
+        entry_last_pay_date = QTableWidgetItem(str(entry.last_date))
+
+        ui.tableWidget.setItem(counter, 0, entry_name)
+        ui.tableWidget.setItem(counter, 1, entry_amount)
+        ui.tableWidget.setItem(counter, 2, entry_pay_rotation)
+        ui.tableWidget.setItem(counter, 3, entry_pay_date)
+        ui.tableWidget.setItem(counter, 4, entry_last_pay_date)
+
         counter = counter + 1
+
 
     main_window.show()
     app.exec_()
