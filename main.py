@@ -39,8 +39,10 @@ def run_main_gui(entries):
     ui = main_gui.Ui_MainWindow()
     ui.setupUi(main_window)
 
+    # an entry has 5 info to be shown
     ui.tableWidget.setColumnCount(5)
 
+    # loop over the array of entries
     counter = 0
     for entry in entries:
 
@@ -61,6 +63,7 @@ def run_main_gui(entries):
         entry_pay_date = QTableWidgetItem(str(entry.date))
         entry_last_pay_date = QTableWidgetItem(str(entry.last_date))
 
+        # add the entry details into the table
         ui.tableWidget.setItem(counter, 0, entry_name)
         ui.tableWidget.setItem(counter, 1, entry_amount)
         ui.tableWidget.setItem(counter, 2, entry_pay_rotation)
@@ -68,7 +71,6 @@ def run_main_gui(entries):
         ui.tableWidget.setItem(counter, 4, entry_last_pay_date)
 
         counter = counter + 1
-
 
     main_window.show()
     app.exec_()
