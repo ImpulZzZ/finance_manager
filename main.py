@@ -39,6 +39,16 @@ def run_main_gui(entries):
     ui = main_gui.Ui_MainWindow()
     ui.setupUi(main_window)
 
+    counter = 0
+    for entry in entries:
+        ui.listWidget.addItem(QListWidgetItem())
+
+        # TODO make distances dynamically, so that amount is vertically symmetric
+        label = entry.name + "     " + str(entry.amount) + "€"
+
+        ui.listWidget.item(counter).setText(label)
+        counter = counter + 1
+
     main_window.show()
     app.exec_()
 
@@ -58,9 +68,11 @@ def main():
     # array of all entries
     entries = []
 
-    # insert a test entry
-    entries.append(Entry(name="Name", description="Entry for test purposes", amount=512, monthly=False, yearly=True,
-                         date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
+    for x in range(0, 60):
+        # insert a test entry
+        test = "Test " + str(x)
+        entries.append(Entry(name=test, description="Entry for test purposes", amount=512, monthly=False, yearly=True,
+                             date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
 
     run_main_gui(entries)
 
