@@ -5,6 +5,18 @@ from view import main_gui as main_gui
 from model.Entry import Entry
 import datetime
 
+ENTRY_INFORMATION_AMOUNT = 5
+
+
+def delete_by_name(entries, name):
+    result = entries
+
+    for current in result:
+        if current.name == name:
+            result.remove(current)
+
+    return result
+
 
 # shows details of an entry
 def run_show_entry_gui(entry_object):
@@ -33,14 +45,34 @@ def run_show_entry_gui(entry_object):
 
 
 # starts the main gui
-def run_main_gui(entries):
+def run_main_gui(loaded_entries):
+
+    #############################################################################
+    def delete_button_pressed():
+
+        # check if something is selected
+        if ui.tableWidget.selectedItems():
+            # delete the entry from entries array
+            delete_by_name(entries, ui.tableWidget.selectedItems()[0].text())
+
+            # get number of selected row
+            row = ui.tableWidget.selectedIndexes()[0].row()
+
+            # delete the row from gui
+            ui.tableWidget.removeRow(row)
+    #############################################################################
+
+    # list of all entries, initialized with given array
+    entries = loaded_entries
+
+    # setup the gui
     app = QApplication([])
     main_window = QMainWindow()
     ui = main_gui.Ui_MainWindow()
     ui.setupUi(main_window)
 
     # an entry has 5 info to be shown
-    ui.tableWidget.setColumnCount(5)
+    ui.tableWidget.setColumnCount(ENTRY_INFORMATION_AMOUNT)
 
     # loop over the array of entries
     counter = 0
@@ -71,6 +103,8 @@ def run_main_gui(entries):
         ui.tableWidget.setItem(counter, 4, entry_last_pay_date)
 
         counter = counter + 1
+
+    ui.delete_button.clicked.connect(delete_button_pressed)
 
     main_window.show()
     app.exec_()
