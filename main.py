@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from view import welcome_gui as welcome_gui
 from view import entry_gui as entry_gui
+from view import new_entry_gui as new_entry_gui
 from view import main_gui as main_gui
 from model.Entry import Entry
 import datetime
@@ -46,7 +47,6 @@ def run_show_entry_gui(entry_object):
 
 # starts the main gui
 def run_main_gui(loaded_entries):
-
     #############################################################################
     def delete_button_pressed():
 
@@ -60,7 +60,14 @@ def run_main_gui(loaded_entries):
 
             # delete the row from gui
             ui.tableWidget.removeRow(row)
+
     #############################################################################
+    # shows details of an entry
+    def run_new_entry_gui():
+        popup.setupUi(popup_window)
+        popup_window.show()
+
+    ##############################################################################
 
     # list of all entries, initialized with given array
     entries = loaded_entries
@@ -104,7 +111,13 @@ def run_main_gui(loaded_entries):
 
         counter = counter + 1
 
+    # setup the popup gui for entry creation
+    popup_window = QMainWindow()
+    popup = new_entry_gui.Ui_MainWindow()
+
+    # bind functions to the buttons
     ui.delete_button.clicked.connect(delete_button_pressed)
+    ui.new_element_button.clicked.connect(run_new_entry_gui)
 
     main_window.show()
     app.exec_()
