@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>170</width>
-    <height>338</height>
+    <width>282</width>
+    <height>351</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <rect>
       <x>30</x>
       <y>20</y>
-      <width>113</width>
+      <width>221</width>
       <height>25</height>
      </rect>
     </property>
@@ -44,7 +44,7 @@
      <rect>
       <x>30</x>
       <y>60</y>
-      <width>113</width>
+      <width>221</width>
       <height>25</height>
      </rect>
     </property>
@@ -67,10 +67,10 @@
    <widget class="QDateEdit" name="date">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>120</y>
-      <width>110</width>
-      <height>26</height>
+      <x>110</x>
+      <y>100</y>
+      <width>151</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="dateTime">
@@ -87,10 +87,10 @@
    <widget class="QDateEdit" name="last_date">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>180</y>
-      <width>110</width>
-      <height>26</height>
+      <x>110</x>
+      <y>150</y>
+      <width>151</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="dateTime">
@@ -107,8 +107,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>100</y>
+      <x>30</x>
+      <y>110</y>
       <width>41</width>
       <height>17</height>
      </rect>
@@ -117,10 +117,10 @@
      <string>Date</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="choose_monthly">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>230</y>
       <width>112</width>
       <height>23</height>
@@ -130,10 +130,10 @@
      <string>Monthly</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_3">
+   <widget class="QRadioButton" name="choose_yearly">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>250</y>
       <width>112</width>
       <height>23</height>
@@ -143,12 +143,12 @@
      <string>Yearly</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="ok_button">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>290</y>
-      <width>71</width>
+      <x>90</x>
+      <y>300</y>
+      <width>111</width>
       <height>25</height>
      </rect>
     </property>
@@ -156,23 +156,10 @@
      <string>OK</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QCheckBox" name="checkBox_last_date">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>290</y>
-      <width>71</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Cancel</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
+      <x>10</x>
       <y>160</y>
       <width>92</width>
       <height>23</height>
@@ -182,10 +169,10 @@
      <string>Last Date</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="choose_once">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>210</y>
       <width>112</width>
       <height>23</height>

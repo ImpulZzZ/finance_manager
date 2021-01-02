@@ -64,6 +64,7 @@ def run_main_gui(loaded_entries):
     #############################################################################
     # shows details of an entry
     def run_new_entry_gui():
+        # make new instance of entry gui
         popup.setupUi(popup_window)
         popup_window.show()
 
@@ -141,7 +142,7 @@ def main():
     for x in range(0, 60):
         # insert a test entry
         test = "Test " + str(x)
-        entries.append(Entry(name=test, description="Entry for test purposes", amount=512, monthly=False, yearly=True,
+        entries.append(Entry(name=test, amount=512, monthly=False, yearly=True,
                              date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
 
     run_main_gui(entries)
