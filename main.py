@@ -49,6 +49,51 @@ def run_show_entry_gui(entry_object):
 # starts the main gui
 def run_main_gui(loaded_entries):
     #############################################################################
+    def add_entry_to_gui(new_entry):
+        position = ui.tableWidget.rowCount()
+
+        # add the entry details into the table
+        ui.tableWidget.setRowCount(position + 1)
+
+        if new_entry.yearly:
+            new_entry_rotation = "yearly"
+        if new_entry.monthly:
+            new_entry_rotation = "monthly"
+        else:
+            new_entry_rotation = "once"
+
+        # make strings as QTableWidgetItems
+        new_entry_name = QTableWidgetItem(new_entry.name)
+        new_entry_amount = QTableWidgetItem(str(new_entry.amount))
+        new_entry_pay_rotation = QTableWidgetItem(new_entry_rotation)
+        new_entry_pay_date = QTableWidgetItem(str(new_entry.date))
+        new_entry_last_pay_date = QTableWidgetItem(str(new_entry.last_date))
+
+        # add the entry details into the table
+        ui.tableWidget.setItem(position, 0, new_entry_name)
+        ui.tableWidget.setItem(position, 1, new_entry_amount)
+        ui.tableWidget.setItem(position, 2, new_entry_pay_rotation)
+        ui.tableWidget.setItem(position, 3, new_entry_pay_date)
+        ui.tableWidget.setItem(position, 4, new_entry_last_pay_date)
+
+    #############################################################################
+    def load_button_pressed():
+
+        entries.clear()
+
+        ui.tableWidget.clear()
+
+        ui.tableWidget.setRowCount(0)
+
+        for current_entry in import_json("Ausgaben.json"):
+            entries.append(current_entry)
+            add_entry_to_gui(current_entry)
+
+    #############################################################################
+    def save_button_pressed():
+        export_to_json(entries, "Ausgaben.json")
+
+    #############################################################################
     def delete_button_pressed():
 
         # check if something is selected
@@ -105,31 +150,7 @@ def run_main_gui(loaded_entries):
         # add entry to entries
         entries.append(new_entry)
 
-        position = ui.tableWidget.rowCount()
-
-        # add the entry details into the table
-        ui.tableWidget.setRowCount(position + 1)
-
-        if new_entry.yearly:
-            new_entry_rotation = "yearly"
-        if new_entry.monthly:
-            new_entry_rotation = "monthly"
-        else:
-            new_entry_rotation = "once"
-
-        # make strings as QTableWidgetItems
-        new_entry_name = QTableWidgetItem(new_entry.name)
-        new_entry_amount = QTableWidgetItem(str(new_entry.amount))
-        new_entry_pay_rotation = QTableWidgetItem(new_entry_rotation)
-        new_entry_pay_date = QTableWidgetItem(str(new_entry.date))
-        new_entry_last_pay_date = QTableWidgetItem(str(new_entry.last_date))
-
-        # add the entry details into the table
-        ui.tableWidget.setItem(position, 0, new_entry_name)
-        ui.tableWidget.setItem(position, 1, new_entry_amount)
-        ui.tableWidget.setItem(position, 2, new_entry_pay_rotation)
-        ui.tableWidget.setItem(position, 3, new_entry_pay_date)
-        ui.tableWidget.setItem(position, 4, new_entry_last_pay_date)
+        add_entry_to_gui(new_entry)
 
         popup_window.close()
 
@@ -185,6 +206,8 @@ def run_main_gui(loaded_entries):
     # bind functions to the buttons
     ui.delete_button.clicked.connect(delete_button_pressed)
     ui.new_element_button.clicked.connect(run_new_entry_gui)
+    ui.actionSave.triggered.connect(save_button_pressed)
+    ui.actionLoad.triggered.connect(load_button_pressed)
 
     main_window.show()
     app.exec_()
@@ -222,7 +245,7 @@ def export_to_json(entries, file):
     return
 
 
-def import_json(entries, file):
+def import_json(file):
     entries = []
 
     # load json file
@@ -253,11 +276,11 @@ def main():
     # array of all entries
     entries = []
 
-    for x in range(0, 60):
-        # insert a test entry
-        test = "Test " + str(x)
-        entries.append(Entry(name=test, amount=512, monthly=False, yearly=True,
-                             date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
+    # for x in range(0, 60):
+    # insert a test entry
+    # test = "Test " + str(x)
+    # entries.append(Entry(name=test, amount=512, monthly=False, yearly=True,
+    # date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
 
     run_main_gui(entries)
 
