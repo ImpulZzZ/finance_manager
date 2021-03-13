@@ -5,6 +5,7 @@ from view import new_entry_gui as new_entry_gui
 from view import main_gui as main_gui
 from model.Entry import Entry
 import datetime
+import json
 
 ENTRY_INFORMATION_AMOUNT = 5
 
@@ -199,6 +200,54 @@ def run_welcome_gui():
     app.exec_()
 
 
+def export_to_json(entries, file):
+    list_of_dicts = []
+
+    # convert objects to dictionary
+    for current in entries:
+        list_of_dicts.append({
+            "name": current.name,
+            "amount": current.amount,
+            "monthly": current.monthly,
+            "yearly": current.yearly,
+            "date": str(current.date),
+            "last_date": str(current.last_date)
+        })
+
+    # overwrites existing file or createes new one with json as content
+    f = open(file, "w")
+    f.write(json.dumps(list_of_dicts))
+    f.close()
+
+    return
+
+
+def import_json(entries, file):
+    entries = []
+
+    # load json file
+    f = open(file, "r")
+    imported_data = json.load(f)
+    f.close()
+
+    # convert json to list
+    for current in imported_data:
+        entries.append(Entry(
+            current['name'],
+            current['amount'],
+            current['monthly'],
+            current['yearly'],
+            datetime.date(int(current['date'][0:4]),
+                          int(current['date'][5:7]),
+                          int(current['date'][8:10])),
+            datetime.date(int(current['last_date'][0:4]),
+                          int(current['last_date'][5:7]),
+                          int(current['last_date'][8:10]))
+        ))
+
+    return entries
+
+
 # entry point of program
 def main():
     # array of all entries
@@ -207,8 +256,8 @@ def main():
     for x in range(0, 60):
         # insert a test entry
         test = "Test " + str(x)
-        # entries.append(Entry(name=test, amount=512, monthly=False, yearly=True,
-        #                     date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
+        entries.append(Entry(name=test, amount=512, monthly=False, yearly=True,
+                             date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
 
     run_main_gui(entries)
 
