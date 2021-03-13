@@ -77,6 +77,43 @@ def run_main_gui(loaded_entries):
         ui.tableWidget.setItem(position, 4, new_entry_last_pay_date)
 
     #############################################################################
+    def calculate_button_pressed():
+
+        # verify which costs are considered
+        monthly = ui.monthly_check_box.isChecked()
+        yearly = ui.yearly_check_box.isChecked()
+        once = ui.once_check_box.isChecked()
+
+        # initialize sum for total cost
+        total_costs = 0
+
+        # calculate total costs and only consider costs that are checked
+        for current in entries:
+            if yearly:
+                if current.yearly:
+                    if ui.divide_yearly_checkbox.isChecked():
+                        total_costs = total_costs + (current.amount / 12)
+                    else:
+                        total_costs = total_costs + current.amount
+            if monthly:
+                if current.monthly:
+                    total_costs = total_costs + current.amount
+            if once:
+                if not current.yearly and not current.monthly:
+                    total_costs = total_costs + current.amount
+
+
+
+        income = int(ui.monthly_income_box.value())
+
+        ui.total_cost.display(total_costs)
+        ui.result_number.display(income - total_costs)
+
+
+
+
+
+    #############################################################################
     def load_button_pressed():
 
         entries.clear()
@@ -208,6 +245,7 @@ def run_main_gui(loaded_entries):
     ui.new_element_button.clicked.connect(run_new_entry_gui)
     ui.actionSave.triggered.connect(save_button_pressed)
     ui.actionLoad.triggered.connect(load_button_pressed)
+    ui.calculate_button.clicked.connect(calculate_button_pressed)
 
     main_window.show()
     app.exec_()

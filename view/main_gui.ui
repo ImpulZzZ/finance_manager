@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>775</width>
+    <width>763</width>
     <height>766</height>
    </rect>
   </property>
@@ -46,17 +46,20 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>100</y>
-      <width>121</width>
+      <y>450</y>
+      <width>141</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>100000</number>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>80</y>
+      <y>430</y>
       <width>121</width>
       <height>17</height>
      </rect>
@@ -68,23 +71,23 @@
      <string>Monthly Income:</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
+   <widget class="QLCDNumber" name="result_number">
     <property name="geometry">
      <rect>
       <x>610</x>
       <y>630</y>
-      <width>151</width>
+      <width>141</width>
       <height>51</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="calculate_button">
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>584</y>
-      <width>151</width>
-      <height>41</height>
+      <y>490</y>
+      <width>141</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -116,7 +119,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>160</y>
+      <y>100</y>
       <width>92</width>
       <height>23</height>
      </rect>
@@ -124,12 +127,15 @@
     <property name="text">
      <string>Monthly</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QCheckBox" name="yearly_check_box">
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>190</y>
+      <y>130</y>
       <width>92</width>
       <height>23</height>
      </rect>
@@ -137,12 +143,15 @@
     <property name="text">
      <string>Yearly</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QCheckBox" name="once_check_box">
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>220</y>
+      <y>160</y>
       <width>92</width>
       <height>23</height>
      </rect>
@@ -150,12 +159,15 @@
     <property name="text">
      <string>Once</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>140</y>
+      <y>80</y>
       <width>71</width>
       <height>17</height>
      </rect>
@@ -168,7 +180,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>300</y>
+      <y>240</y>
       <width>110</width>
       <height>26</height>
      </rect>
@@ -178,7 +190,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>350</y>
+      <y>290</y>
       <width>110</width>
       <height>26</height>
      </rect>
@@ -188,7 +200,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>330</y>
+      <y>270</y>
       <width>92</width>
       <height>23</height>
      </rect>
@@ -201,7 +213,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>280</y>
+      <y>220</y>
       <width>92</width>
       <height>23</height>
      </rect>
@@ -214,20 +226,20 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>260</y>
-      <width>61</width>
+      <y>200</y>
+      <width>111</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Interval:</string>
+     <string>Interval: (WIP)</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="divide_yearly_checkbox">
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>390</y>
+      <y>350</y>
       <width>191</width>
       <height>23</height>
      </rect>
@@ -254,13 +266,49 @@
      <string>Delete Element</string>
     </property>
    </widget>
+   <widget class="QLCDNumber" name="total_cost">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>550</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>530</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Total cost:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>610</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Remaining:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>775</width>
+     <width>763</width>
      <height>22</height>
     </rect>
    </property>
