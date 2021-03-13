@@ -57,7 +57,7 @@ def run_main_gui(loaded_entries):
 
         if new_entry.yearly:
             new_entry_rotation = "yearly"
-        if new_entry.monthly:
+        elif new_entry.monthly:
             new_entry_rotation = "monthly"
         else:
             new_entry_rotation = "once"
