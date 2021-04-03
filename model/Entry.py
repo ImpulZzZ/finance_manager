@@ -51,3 +51,38 @@ class Entry:
 
     def set_last_date(self, last_date):
         self.last_date = last_date
+
+    # evaluate entry and return calculated value
+    def calculate(self, checkboxes, from_date, to_date):
+
+        costs = 0
+        savings = 0
+
+        # evaluate whether paydate for unique costs is in interval or not
+        if not self.monthly and not self.yearly:
+            if checkboxes["from_date"]:
+                if self.date.year           < from_date["year"]:
+                    if self.date.month      < from_date["month"]:
+                        return (0, 0)
+
+            if checkboxes["to_date"]:
+                if self.date.year           > to_date["year"]:
+                    if self.date.month      > to_date["month"]:
+                        return (0, 0)
+
+
+        if checkboxes["yearly"]:
+            if self.yearly:
+                if checkboxes["yearly_to_monthly"]:
+                    costs = costs + (self.amount / 12)
+                else:
+                    costs = costs + self.amount
+                savings = savings + (self.amount / 12)
+        if checkboxes["monthly"]:
+            if self.monthly:
+                costs = costs + self.amount
+        if checkboxes["once"]:
+            if not self.yearly and not self.monthly:
+                costs = costs + self.amount
+
+        return (costs, savings)

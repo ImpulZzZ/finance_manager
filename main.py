@@ -6,6 +6,7 @@ from view import main_gui as main_gui
 from model.Entry import Entry
 import datetime
 import json
+import math
 
 ENTRY_INFORMATION_AMOUNT = 5
 
@@ -79,39 +80,49 @@ def run_main_gui(loaded_entries):
     #############################################################################
     def calculate_button_pressed():
 
-        # verify which costs are considered
-        monthly = ui.monthly_check_box.isChecked()
-        yearly = ui.yearly_check_box.isChecked()
-        once = ui.once_check_box.isChecked()
+      income = int(ui.monthly_income_box.value())
 
-        # initialize sum for total cost
-        total_costs = 0
+      # verify which checkboxes are pressed or not pressed
+      checkboxes = {
+          "monthly":            ui.monthly_check_box.isChecked(),
+          "yearly":             ui.yearly_check_box.isChecked(),
+          "once":               ui.once_check_box.isChecked(),
+          "from_date":          ui.from_date_checkbox.isChecked(),
+          "to_date":            ui.to_date_checkbox.isChecked(),
+          "yearly_to_monthly":  ui.divide_yearly_checkbox.isChecked()
+      }
 
-        # calculate total costs and only consider costs that are checked
-        for current in entries:
-            if yearly:
-                if current.yearly:
-                    if ui.divide_yearly_checkbox.isChecked():
-                        total_costs = total_costs + (current.amount / 12)
-                    else:
-                        total_costs = total_costs + current.amount
-            if monthly:
-                if current.monthly:
-                    total_costs = total_costs + current.amount
-            if once:
-                if not current.yearly and not current.monthly:
-                    total_costs = total_costs + current.amount
+      # parse gui-dates to dictionaries
+      tmp = ui.from_date.text().split('.')
+      from_date = {
+        #"day":    int(tmp[0]),
+        "month":  int(tmp[0]),
+        "year":   int(tmp[1]) + 2000
+      }
 
+      tmp = ui.to_date.text().split('.')
+      to_date = {
+        #"day":    int(tmp[0]) + 2000,
+        "month":  int(tmp[0]),
+        "year":   int(tmp[1]) + 2000
+      }
 
+      # calculate total costs and savings per month
+      total_costs = 0
+      to_be_saved = 0
+      for current in entries:
+        (current_costs, current_save) = current.calculate(checkboxes, from_date, to_date)
+        total_costs = total_costs + current_costs
+        to_be_saved = to_be_saved + current_save
 
-        income = int(ui.monthly_income_box.value())
-
-        ui.total_cost.display(total_costs)
-        ui.result_number.display(income - total_costs)
-
-
-
-
+      # round up results
+      total_costs = math.ceil(total_costs)
+      to_be_saved = math.ceil(to_be_saved)
+      
+      # display results
+      ui.total_cost.display(total_costs)
+      ui.to_be_saved.display(to_be_saved)
+      ui.result_number.display(income - total_costs)
 
     #############################################################################
     def load_button_pressed():
@@ -313,12 +324,6 @@ def import_json(file):
 def main():
     # array of all entries
     entries = []
-
-    # for x in range(0, 60):
-    # insert a test entry
-    # test = "Test " + str(x)
-    # entries.append(Entry(name=test, amount=512, monthly=False, yearly=True,
-    # date=datetime.date(2021, 11, 27), last_date=datetime.date(2021, 12, 27)))
 
     run_main_gui(entries)
 
